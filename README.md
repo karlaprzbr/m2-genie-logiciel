@@ -1,1 +1,11 @@
-# m2-genie-logiciel
+# UNIT TESTS LECTURE
+
+## Installation
+
+Install Composer dependencies
+
+    composer install
+
+## Run the tests
+
+    ./vendor/bin/phpunit tests
