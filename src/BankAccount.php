@@ -31,4 +31,10 @@ class BankAccount
         return $this;
     }
 
+    public function sendMoney(int $amount, BankAccount $account): void
+    {
+        $this->remove($amount);
+        $account->add($amount);
+    }
+
 }
