@@ -2,27 +2,32 @@
 
 class BankAccount
 {
-    private $solde;
+    private $balance;
 
     public function __construct()
     {
-        $this->solde = 0;
+        $this->balance = 0;
     }
 
-    public function getSolde()
+    public function getBalance()
     {
-        return $this->solde;
+        return $this->balance;
     }
 
-    public function crediter(int $montant)
+    public function add(int $amount)
     {
-        $this->solde += $montant;
+        $this->balance += $amount;
         return $this;
     }
 
-    public function debiter(int $montant)
+    public function remove(int $amount)
     {
-        $this->solde -= $montant;
+        $tmp_balance = $this->balance - $amount;
+        if($tmp_balance < 0) {
+            throw new Exception('Découvert non autorisé');
+        } else {
+            $this->balance -= $amount;
+        }
         return $this;
     }
 

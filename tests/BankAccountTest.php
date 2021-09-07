@@ -5,31 +5,38 @@ use PHPUnit\Framework\TestCase;
 final class BankAccountTest extends TestCase
 {
     
-    public function testCreaCompte(): void
+    public function testNewAccount(): void
     {
-        $compte = new BankAccount();
-        $this->assertSame(0, $compte->getSolde());
+        $account = new BankAccount();
+        $this->assertSame(0, $account->getBalance());
     }
 
-    public function testCrediter(): void
+    public function testAdd(): void
     {
-        $compte = new BankAccount();
-        $compte->crediter(50);
-        $this->assertSame(50, $compte->getSolde());
+        $account = new BankAccount();
+        $account->add(50);
+        $this->assertSame(50, $account->getBalance());
     }
     
-    public function testDebiter(): void
+    public function testRemove(): void
     {
-        $compte = new BankAccount();
-        $compte->debiter(25);
-        $this->assertSame(-25, $compte->getSolde());
-        
+        $account = new BankAccount();
+        $account->add(100);
+        $account->remove(25);
+        $this->assertSame(75, $account->getBalance());
     }
 
     public function testErreur()
     {
         $this->expectException(TypeError::class);
-        $compte = new BankAccount();
-        $compte->debiter(2.5);   
+        $account = new BankAccount();
+        $account->remove(2.5);   
+    }
+
+    public function testErreur2()
+    {
+        $this->expectExceptionMessage("Découvert non autorisé");
+        $account = new BankAccount();
+        $account->remove(50);   
     }
 }
